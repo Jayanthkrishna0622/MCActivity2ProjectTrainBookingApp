@@ -1,0 +1,66 @@
+Project Aim
+The aim of this project is to develop a "Mobile-Based Railway Ticket Booking System" using MIT App Inventor. 
+The application allows users to search for trains between specific stations, select travel classes, calculate fares automatically based on distance and class, and generate a digital ticket with a unique PNR, all while storing user data locally using "TinyDB".
+
+Technical Algorithms (Screen-by-Screen)
+Screen 1: Splash Screen
+   Algorithm:
+   1. Start the application.
+   2. Trigger a "Clock Timer" set to 3000ms (3 seconds).
+   3. When the timer finishes, use open another screen to transition to the "Login Screen".
+
+Screen 2: Login / Registration
+   Algorithm:
+   1. Input Username and Password.
+   2.On SignUp:Store the password in TinyDB using the Username as the "Tag".
+   3.On Login: Check if TinyDB.GetValue ( tag: Username) equals the entered password.
+   4. If matched, open Home Screen; else, show a "Wrong Credentials" alert via Notifier.
+
+Screen 3: Home Screen (Dashboard)
+  Algorithm:
+   1. Fetch the user's name from TinyDB to display a "Welcome" message.
+   2. Wait for button clicks (Book Ticket, Profile, History).
+   3. Redirect the user to the corresponding Screen ID based on the button pressed.
+
+Screen 4: Search Screen
+  Algorithm:
+   1. Provide Spinners/TextBoxes for From, To, and Date.
+   2. When "Search" is clicked, store the Source and Destination values in TinyDB.
+   3. Open the Train List Screen.
+
+Screen 5: Train List Screen
+ Algorithm:
+   1. On initialize, populate a "ListView" with available train names and times.
+   2. When an item is picked from the list, store the Selection (Train Name) into TinyDB under the tag "SelectedTrain".
+   3. Open Booking Screen.
+
+Screen 6: Booking Screen
+ Algorithm:
+   1. Capture passenger details (Name, Age).
+   2. Provide a Selection (1AC, 2AC, Sleeper).
+   3. Store the selected Class and Name into TinyDB.
+   4. Open Payment Scree.
+Screen 7: Payment Screen (Fare Calculation)
+ Algorithm:
+   1. Fetch "Travel Class" from TinyDB.
+   2. Use If-Then-Else logic:
+     If Class = "1AC", then Price = 1200.
+     If Class = "3AC", then Price = 700.
+     Else, Price = 300.
+   3. Display the total. On "Pay Now" click, store the price and open the Ticket Screen.
+
+Screen 8: Ticket Screen (PNR Generation)
+Algorithm:
+   1. Use join blocks to fetch and display all stored data (Name, Train, Class, Price).
+   2. Generate a random PNR using the random integer block (e.g., 100000 to 999999).
+   3. Display the final ticket layout.
+
+Screen 9: Live Status / History
+Algorithm:
+   1. Pull the "SelectedTrain" and "Date" from TinyDB.
+   2. Display the status as "On Time" or "Confirmed" to simulate a real-time database.
+
+Screen 10: User Profile
+ Algorithm:
+   1. Display the stored registration details.
+   2. Provide a Logout button that clears the current session and returns to Screen 1 or 2.
